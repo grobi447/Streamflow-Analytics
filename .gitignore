@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.env
+venv/
+.venv/
+
+# Node
+node_modules/
+dist/
+.angular/
+
+# Docker
+*.log
+
+# K8s secrets
+k8s/secrets/
+
+# IDE
+.vscode/
+.idea/
