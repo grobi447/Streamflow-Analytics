@@ -2,6 +2,11 @@
 
 cd "$(dirname "$0")/.."
 
+echo "Building api-gateway..."
+docker build -t streamflow/api-gateway:latest ./backend/api-gateway
+docker tag streamflow/api-gateway:latest localhost/streamflow/api-gateway:latest
+echo "Done!"
+
 echo "Building auth-service..."
 docker build -t streamflow/auth-service:latest ./backend/auth-service
 docker tag streamflow/auth-service:latest localhost/streamflow/auth-service:latest
@@ -23,4 +28,3 @@ docker tag streamflow/alert-service:latest localhost/streamflow/alert-service:la
 echo "Done!"
 
 echo "All images built!"
-read -p "Press Enter to exit..."

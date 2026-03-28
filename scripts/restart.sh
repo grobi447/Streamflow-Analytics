@@ -10,6 +10,7 @@ kubectl rollout restart deployment/auth-service -n streamflow
 kubectl rollout restart deployment/ingestion-service -n streamflow
 kubectl rollout restart deployment/analytics-service -n streamflow
 kubectl rollout restart deployment/alert-service -n streamflow
+kubectl rollout restart deployment/api-gateway -n streamflow
 echo "Done!"
 
 read -p "Press Enter to exit..."
