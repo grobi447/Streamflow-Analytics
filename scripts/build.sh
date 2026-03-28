@@ -2,6 +2,11 @@
 
 cd "$(dirname "$0")/.."
 
+echo "Building auth-service..."
+docker build -t streamflow/auth-service:latest ./backend/auth-service
+docker tag streamflow/auth-service:latest localhost/streamflow/auth-service:latest
+echo "Done!"
+
 echo "Building ingestion-service..."
 docker build -t streamflow/ingestion-service:latest ./backend/ingestion-service
 docker tag streamflow/ingestion-service:latest localhost/streamflow/ingestion-service:latest

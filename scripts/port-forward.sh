@@ -15,6 +15,9 @@ echo "Kafka             → localhost:9092"
 kubectl port-forward svc/kafka-ui 8080:8080 -n streamflow &
 echo "Kafka UI          → localhost:8080"
 
+kubectl port-forward svc/auth-service 8001:8001 -n streamflow &
+echo "Auth Service      → localhost:8001"
+
 kubectl port-forward svc/ingestion-service 8002:8002 -n streamflow &
 echo "Ingestion Service → localhost:8002"
 
