@@ -1,7 +1,9 @@
 #!/bin/bash
 
+cd "$(dirname "$0")/.."
+
 echo "StreamFlow Analytics Status"
-echo "================================"
+echo "============================"
 echo ""
 echo "Pods:"
 kubectl get pods -n streamflow

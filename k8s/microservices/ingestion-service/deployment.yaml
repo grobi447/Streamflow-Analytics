@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ingestion-service
+  namespace: streamflow
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ingestion-service
+  template:
+    metadata:
+      labels:
+        app: ingestion-service
+    spec:
+      containers:
+        - name: ingestion-service
+          image: localhost/streamflow/ingestion-service:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8002
+          envFrom:
+            - secretRef:
+                name: vertica-secret
+          env:
+            - name: KAFKA_BOOTSTRAP_SERVERS
+              value: "kafka:9092"
+            - name: KAFKA_TOPIC
+              value: "network.events"
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"

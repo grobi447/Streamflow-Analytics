@@ -7,7 +7,15 @@ echo "Press Ctrl+C to stop"
 echo ""
 
 kubectl port-forward svc/vertica 5433:5433 -n streamflow &
+echo "Vertica           → localhost:5433"
+
 kubectl port-forward svc/kafka 9092:9092 -n streamflow &
+echo "Kafka             → localhost:9092"
+
 kubectl port-forward svc/kafka-ui 8080:8080 -n streamflow &
+echo "Kafka UI          → localhost:8080"
+
+kubectl port-forward svc/ingestion-service 8002:8002 -n streamflow &
+echo "Ingestion Service → localhost:8002"
 
 wait
