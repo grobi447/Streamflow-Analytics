@@ -10,6 +10,7 @@ if [ -z "$1" ]; then
   echo "  kafka"
   echo "  kafka-ui"
   echo "  ingestion-service"
+  echo "  analytics-service"
 else
   kubectl logs -l app=$1 -n streamflow --tail=100 -f
 fi

@@ -18,4 +18,7 @@ echo "Kafka UI          → localhost:8080"
 kubectl port-forward svc/ingestion-service 8002:8002 -n streamflow &
 echo "Ingestion Service → localhost:8002"
 
+kubectl port-forward svc/analytics-service 8003:8003 -n streamflow &
+echo "Analytics Service → localhost:8003"
+
 wait

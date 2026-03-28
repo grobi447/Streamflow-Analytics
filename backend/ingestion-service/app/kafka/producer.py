@@ -5,7 +5,7 @@ from app.config import settings
 class KafkaProducer:
     def __init__(self):
         self._producer = _KafkaProducer(
-            bootstrap_servers=settings.kafka_bootstrap_servers,
+            bootstrap_servers=settings.KAFKA_BOOTSTRAP_SERVERS,
             value_serializer=lambda v: json.dumps(v, default=str).encode('utf-8')
         )
 

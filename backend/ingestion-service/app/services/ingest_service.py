@@ -15,7 +15,7 @@ class IngestService:
         event_dict = event.model_dump()
         event_dict['event_id'] = event_id
 
-        kafka_producer.send(settings.kafka_topic, event_dict)
+        kafka_producer.send(settings.KAFKA_TOPIC, event_dict)
         self._repository.insert(event_id, event)
 
         return IngestResponse(

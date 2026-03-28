@@ -22,6 +22,8 @@ echo "Waiting for pods to be ready..."
 kubectl wait --for=condition=ready pod -l app=vertica -n streamflow --timeout=120s
 kubectl wait --for=condition=ready pod -l app=kafka -n streamflow --timeout=120s
 kubectl wait --for=condition=ready pod -l app=ingestion-service -n streamflow --timeout=120s
+kubectl wait --for=condition=ready pod -l app=analytics-service -n streamflow --timeout=120s
+
 echo "Done!"
 
 read -p "Press Enter to exit..."
