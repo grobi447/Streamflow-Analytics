@@ -21,4 +21,7 @@ echo "Ingestion Service → localhost:8002"
 kubectl port-forward svc/analytics-service 8003:8003 -n streamflow &
 echo "Analytics Service → localhost:8003"
 
+kubectl port-forward svc/alert-service 8004:8004 -n streamflow &
+echo "Alert Service     → localhost:8004"
+
 wait

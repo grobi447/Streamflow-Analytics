@@ -12,4 +12,10 @@ docker build -t streamflow/analytics-service:latest ./backend/analytics-service
 docker tag streamflow/analytics-service:latest localhost/streamflow/analytics-service:latest
 echo "Done!"
 
+echo "Building alert-service..."
+docker build -t streamflow/alert-service:latest ./backend/alert-service
+docker tag streamflow/alert-service:latest localhost/streamflow/alert-service:latest
+echo "Done!"
+
+echo "All images built!"
 read -p "Press Enter to exit..."
