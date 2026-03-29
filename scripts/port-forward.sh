@@ -33,4 +33,6 @@ echo "Analytics Service → localhost:8003"
 kubectl port-forward svc/alert-service 8004:8004 -n streamflow &
 echo "Alert Service     → localhost:8004"
 
+kubectl port-forward svc/frontend 4200:80 -n streamflow &
+echo "Frontend          → localhost:4200"
 wait

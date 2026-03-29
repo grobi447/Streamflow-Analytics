@@ -16,6 +16,7 @@ if [ -z "$1" ]; then
   echo "  ingestion-service"
   echo "  analytics-service"
   echo "  alert-service"
+  echo "  frontend"
 else
   kubectl logs -l app=$1 -n streamflow --tail=100 -f
 fi

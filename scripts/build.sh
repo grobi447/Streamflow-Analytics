@@ -32,6 +32,11 @@ docker build -t streamflow/api-gateway:latest ./backend/api-gateway
 docker tag streamflow/api-gateway:latest localhost/streamflow/api-gateway:latest
 echo "Done!"
 
+echo "Building frontend..."
+docker build -t streamflow/frontend:latest ./frontend
+docker tag streamflow/frontend:latest localhost/streamflow/frontend:latest
+echo "Done!"
+
 echo "All images built!"
 
 read -p "Press Enter to exit..."
