@@ -7,6 +7,7 @@ kubectl rollout restart deployment/vertica -n streamflow
 kubectl rollout restart deployment/kafka -n streamflow
 kubectl rollout restart deployment/kafka-ui -n streamflow
 kubectl rollout restart deployment/nginx -n streamflow
+kubectl rollout restart deployment/simulator -n streamflow
 kubectl rollout restart deployment/auth-service -n streamflow
 kubectl rollout restart deployment/ingestion-service -n streamflow
 kubectl rollout restart deployment/analytics-service -n streamflow

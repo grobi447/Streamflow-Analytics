@@ -10,6 +10,7 @@ if [ -z "$1" ]; then
   echo "  kafka"
   echo "  kafka-ui"
   echo "  nginx"
+  echo "  simulator"
   echo "  api-gateway"
   echo "  auth-service"
   echo "  ingestion-service"

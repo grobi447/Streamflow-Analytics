@@ -21,14 +21,21 @@ fi
 if kubectl get secret nginx-tls -n streamflow &>/dev/null; then
   echo "nginx-tls secret exists"
 else
-  echo "Warning: nginx-tls secret not found!"
-  echo "Run: openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout k8s/secrets/nginx.key -out k8s/secrets/nginx.crt -subj '/CN=streamflow.local/O=StreamFlow'"
-  echo "Then: kubectl create secret tls nginx-tls --cert=k8s/secrets/nginx.crt --key=k8s/secrets/nginx.key -n streamflow"
+  if [ -f "k8s/secrets/nginx.crt" ] && [ -f "k8s/secrets/nginx.key" ]; then
+    kubectl create secret tls nginx-tls \
+      --cert=k8s/secrets/nginx.crt \
+      --key=k8s/secrets/nginx.key \
+      -n streamflow
+    echo "nginx-tls secret created"
+  else
+    echo "Warning: nginx.crt or nginx.key not found!"
+  fi
 fi
 
 kubectl apply -f k8s/vertica/
 kubectl apply -f k8s/kafka/
 kubectl apply -f k8s/nginx/
+kubectl apply -f k8s/simulator/
 kubectl apply -f k8s/microservices/ingestion-service/
 kubectl apply -f k8s/microservices/analytics-service/
 kubectl apply -f k8s/microservices/alert-service/
@@ -40,6 +47,7 @@ echo "Waiting for pods to be ready..."
 kubectl wait --for=condition=ready pod -l app=vertica -n streamflow --timeout=120s
 kubectl wait --for=condition=ready pod -l app=kafka -n streamflow --timeout=120s
 kubectl wait --for=condition=ready pod -l app=nginx -n streamflow --timeout=120s
+kubectl wait --for=condition=ready pod -l app=simulator -n streamflow --timeout=120s
 kubectl wait --for=condition=ready pod -l app=ingestion-service -n streamflow --timeout=120s
 kubectl wait --for=condition=ready pod -l app=analytics-service -n streamflow --timeout=120s
 kubectl wait --for=condition=ready pod -l app=alert-service -n streamflow --timeout=120s

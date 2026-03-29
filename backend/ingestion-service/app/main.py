@@ -2,10 +2,13 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from app.routers import ingest
 from app.database.repositories.event_repository import EventRepository
+from app.kafka.consumer import KafkaEventConsumer
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     EventRepository().init_table()
+    consumer = KafkaEventConsumer(repository=EventRepository())
+    consumer.start()
     yield
 
 app = FastAPI(title="Ingestion Service", lifespan=lifespan)
