@@ -15,6 +15,9 @@ echo "Kafka             → localhost:9092"
 kubectl port-forward svc/kafka-ui 8080:8080 -n streamflow &
 echo "Kafka UI          → localhost:8080"
 
+kubectl port-forward svc/nginx 8443:443 -n streamflow &
+echo "HTTPS             → https://localhost:8443"
+
 kubectl port-forward svc/api-gateway 8000:8000 -n streamflow &
 echo "API Gateway       → localhost:8000"
 

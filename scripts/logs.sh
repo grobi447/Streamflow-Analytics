@@ -9,6 +9,7 @@ if [ -z "$1" ]; then
   echo "  vertica"
   echo "  kafka"
   echo "  kafka-ui"
+  echo "  nginx"
   echo "  api-gateway"
   echo "  auth-service"
   echo "  ingestion-service"
