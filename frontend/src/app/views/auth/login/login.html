@@ -1,0 +1,40 @@
+<div class="login-container">
+    <div class="login-card">
+        <div class="login-header">
+            <h1>StreamFlow Analytics</h1>
+            <p>Network Traffic Monitoring Platform</p>
+        </div>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input id="username" type="text" formControlName="username" placeholder="Enter username"
+                    [class.error]="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" />
+                @if (loginForm.get('username')?.invalid && loginForm.get('username')?.touched) {
+                <span class="error-text">Username is required</span>
+                }
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input id="password" type="password" formControlName="password" placeholder="Enter password"
+                    [class.error]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" />
+                @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+                <span class="error-text">Password must be at least 6 characters</span>
+                }
+            </div>
+
+            @if (error) {
+            <div class="error-banner">{{ error }}</div>
+            }
+
+            <button type="submit" [disabled]="loading">
+                @if (loading) { Logging in... } @else { Login }
+            </button>
+        </form>
+        <p class="register-link">
+            Don't have an account?
+            <a routerLink="/register">Register</a>
+        </p>
+    </div>
+</div>

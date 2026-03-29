@@ -1,0 +1,53 @@
+<div class="register-container">
+    <div class="register-card">
+        <div class="register-header">
+            <h1>StreamFlow Analytics</h1>
+            <p>Create your account</p>
+        </div>
+
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input id="username" type="text" formControlName="username" placeholder="Enter username" />
+                @if (registerForm.get('username')?.invalid && registerForm.get('username')?.touched) {
+                <span class="error-text">Username is required</span>
+                }
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" type="email" formControlName="email" placeholder="Enter email" />
+                @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
+                <span class="error-text">Valid email is required</span>
+                }
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input id="password" type="password" formControlName="password" placeholder="Enter password" />
+                @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
+                <span class="error-text">Password must be at least 6 characters</span>
+                }
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input id="confirmPassword" type="password" formControlName="confirmPassword"
+                    placeholder="Confirm password" />
+                @if (registerForm.errors?.['passwordMismatch'] && registerForm.get('confirmPassword')?.touched) {
+                <span class="error-text">Passwords do not match</span>
+                }
+            </div>
+
+            @if (error) {
+            <div class="error-banner">{{ error }}</div>
+            }
+
+            <button type="submit" [disabled]="loading">
+                @if (loading) { Creating account... } @else { Register }
+            </button>
+
+            <p class="login-link">Already have an account? <a routerLink="/login">Login</a></p>
+        </form>
+    </div>
+</div>
