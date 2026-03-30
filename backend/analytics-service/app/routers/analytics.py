@@ -45,3 +45,25 @@ async def get_trends(hours: int = 24) -> List[TrendPoint]:
         return analytics_service.get_trends(hours)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+    
+@router.get("/devices", response_model=List[DeviceSummary])
+async def get_all_devices() -> List[DeviceSummary]:
+    try:
+        return analytics_service.get_all_devices()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    
+@router.get("/trends", response_model=List[TrendPoint])
+async def get_trends(hours: float = 24, minutes: int = 0) -> List[TrendPoint]:
+    try:
+        total_minutes = int(hours * 60) + minutes
+        return analytics_service.get_trends_minutes(total_minutes)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/latest-devices", response_model=List[DeviceSummary])
+async def get_latest_devices() -> List[DeviceSummary]:
+    try:
+        return analytics_service.get_latest_device_values()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

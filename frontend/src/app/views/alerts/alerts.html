@@ -1,0 +1,25 @@
+<div class="alerts-page">
+    <div class="page-header">
+        <div>
+            <h1>Alerts</h1>
+            <p class="subtitle">
+                Real-time network anomaly detection
+                @if (wsConnected) {
+                <span class="ws-badge">🟢 Live</span>
+                } @else {
+                <span class="ws-badge offline">🔴 Reconnecting...</span>
+                }
+            </p>
+        </div>
+        <label class="toggle">
+            <input type="checkbox" [(ngModel)]="showResolved" />
+            <span>Show resolved</span>
+        </label>
+    </div>
+
+    <app-alert-stats [alerts]="allAlerts" />
+
+    <div class="card">
+        <app-alert-list [alerts]="allAlerts" [showResolved]="showResolved" (resolve)="resolveAlert($event)" />
+    </div>
+</div>

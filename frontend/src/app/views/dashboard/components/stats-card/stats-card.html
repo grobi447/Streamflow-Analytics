@@ -1,0 +1,9 @@
+<div class="stats-card" [style.--accent]="color">
+    <div class="card-header">
+        <span class="card-title">{{ title }}</span>
+        <span class="card-icon">{{ icon }}</span>
+    </div>
+    <div class="card-value" [style.color]="color">
+        {{ value }}<span class="card-unit">{{ unit }}</span>
+    </div>
+</div>

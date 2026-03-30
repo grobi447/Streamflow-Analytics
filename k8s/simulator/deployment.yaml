@@ -28,6 +28,14 @@ spec:
               value: "100"
             - name: PYTHONUNBUFFERED
               value: "1"
+            - name: ANOMALY_PROBABILITY
+              value: "0.15"
+            - name: ANOMALY_DURATION_SECONDS
+              value: "20"
+            - name: HIGH_LATENCY_MAX
+              value: "300"
+            - name: HIGH_PACKET_LOSS_MAX
+              value: "15"
           resources:
             requests:
               memory: "128Mi"

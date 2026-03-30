@@ -1,1 +1,55 @@
-<p>dashboard works!</p>
+<div class="dashboard">
+    <div class="dashboard-header">
+        <div>
+            <h1>Network Dashboard</h1>
+            @if (store.lastUpdated()) {
+            <span class="last-updated">Last updated: {{ store.lastUpdated() | date:'HH:mm:ss' }}</span>
+            }
+        </div>
+        <div class="header-right">
+            <div class="time-range-buttons">
+                @for (range of timeRanges; track range.label) {
+                <button class="time-btn" [class.active]="store.selectedMinutes() === range.minutes"
+                    (click)="selectTimeRange(range.minutes)">{{ range.label }}</button>
+                }
+            </div>
+            <div class="live-indicator">
+                <span class="pulse"></span> LIVE
+            </div>
+        </div>
+    </div>
+
+    <div class="stats-grid">
+        <app-stats-card title="Total Events" [value]="store.totalEvents()" icon="📡" color="#3b82f6" />
+        <app-stats-card title="Active Devices" [value]="store.totalDevices()" icon="🗼" color="#10b981" />
+        <app-stats-card title="Locations" [value]="store.totalLocations()" icon="📍" color="#8b5cf6" />
+        <app-stats-card title="Avg Latency" [value]="store.avgLatency() | number:'1.1-1'" unit="ms" icon="⚡"
+            [color]="store.avgLatency() > 100 ? '#ef4444' : store.avgLatency() > 50 ? '#f59e0b' : '#10b981'" />
+        <app-stats-card title="Packet Loss" [value]="store.avgPacketLoss() | number:'1.2-2'" unit="%" icon="📉"
+            [color]="store.avgPacketLoss() > 5 ? '#ef4444' : '#10b981'" />
+        <app-stats-card title="Avg Bandwidth" [value]="store.avgBandwidth() | number:'1.0-0'" unit="Mbps" icon="🚀"
+            color="#06b6d4" />
+    </div>
+
+    <div class="charts-row">
+        <div class="chart-card">
+            <app-latency-chart [trends]="store.trends()" [timeLabel]="store.selectedLabel()" />
+        </div>
+        <div class="chart-card">
+            <app-bandwidth-chart [trends]="store.trends()" [timeLabel]="store.selectedLabel()" />
+        </div>
+    </div>
+
+    <div class="map-card">
+        <app-hungary-map [devices]="store.latestDevices()" />
+    </div>
+
+    <div class="charts-row">
+        <div class="chart-card chart-card--wide">
+            <app-multi-metric-chart [trends]="store.trends()" />
+        </div>
+        <div class="chart-card">
+            <app-top-devices-chart [devices]="store.topLatency()" />
+        </div>
+    </div>
+</div>

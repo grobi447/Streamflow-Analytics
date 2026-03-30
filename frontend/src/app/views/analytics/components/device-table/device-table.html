@@ -1,0 +1,47 @@
+<div class="device-table">
+    <div class="table-header">
+        <h3>Device Analytics</h3>
+        <input class="search-input" [(ngModel)]="search" (input)="applyFilter()"
+            placeholder="Search device or location..." />
+    </div>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th (click)="sort('device_id')">Device ID</th>
+                    <th (click)="sort('location')">Location</th>
+                    <th (click)="sort('avg_latency_ms')">Latency (ms)</th>
+                    <th (click)="sort('avg_packet_loss')">Packet Loss (%)</th>
+                    <th (click)="sort('avg_bandwidth_mbps')">Bandwidth (Mbps)</th>
+                    <th (click)="sort('avg_signal_strength_dbm')">Signal (dBm)</th>
+                    <th (click)="sort('total_events')">Events</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (device of filtered; track device.device_id) {
+                <tr>
+                    <td class="mono">{{ device.device_id }}</td>
+                    <td>{{ device.location }}</td>
+                    <td [style.color]="getLatencyColor(device.avg_latency_ms)">{{ device.avg_latency_ms | number:'1.1-1'
+                        }}</td>
+                    <td [style.color]="device.avg_packet_loss > 5 ? '#ef4444' : '#10b981'">{{ device.avg_packet_loss |
+                        number:'1.2-2' }}</td>
+                    <td>{{ device.avg_bandwidth_mbps | number:'1.0-0' }}</td>
+                    <td
+                        [style.color]="device.avg_signal_strength_dbm > -70 ? '#10b981' : device.avg_signal_strength_dbm > -85 ? '#f59e0b' : '#ef4444'">
+                        {{ device.avg_signal_strength_dbm | number:'1.1-1' }}
+                    </td>
+                    <td>{{ device.total_events }}</td>
+                    <td>
+                        <span class="badge" [style.background]="getLatencyColor(device.avg_latency_ms)">
+                            {{ getStatusBadge(device.avg_latency_ms) }}
+                        </span>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="table-footer">{{ filtered.length }} / {{ devices.length }} devices</div>
+</div>

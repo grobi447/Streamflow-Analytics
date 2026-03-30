@@ -1,0 +1,98 @@
+.device-table {
+    .table-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+
+        h3 {
+            color: #f1f5f9;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .search-input {
+            padding: 8px 12px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            color: #f1f5f9;
+            font-size: 13px;
+            width: 240px;
+
+            &:focus {
+                outline: none;
+                border-color: #3b82f6;
+            }
+        }
+    }
+
+    .table-wrapper {
+        overflow-x: auto;
+        max-height: 400px;
+        overflow-y: auto;
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+
+            thead tr {
+                position: sticky;
+                top: 0;
+                background: #0f172a;
+
+                th {
+                    padding: 10px 12px;
+                    color: #64748b;
+                    text-align: left;
+                    font-weight: 600;
+                    cursor: pointer;
+                    white-space: nowrap;
+                    border-bottom: 1px solid #334155;
+                    text-transform: uppercase;
+                    letter-spacing: 0.05em;
+                    font-size: 11px;
+
+                    &:hover {
+                        color: #3b82f6;
+                    }
+                }
+            }
+
+            tbody tr {
+                border-bottom: 1px solid #1e293b;
+                transition: background 0.1s;
+
+                &:hover {
+                    background: #1e293b;
+                }
+
+                td {
+                    padding: 10px 12px;
+                    color: #94a3b8;
+
+                    &.mono {
+                        font-family: monospace;
+                        color: #f1f5f9;
+                    }
+                }
+            }
+        }
+    }
+
+    .table-footer {
+        color: #64748b;
+        font-size: 12px;
+        margin-top: 8px;
+        text-align: right;
+    }
+
+    .badge {
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 10px;
+        font-weight: 600;
+        color: #0f172a;
+    }
+}

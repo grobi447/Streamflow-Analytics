@@ -1,0 +1,32 @@
+<div class="alert-list">
+    @if (filtered.length === 0) {
+    <div class="empty-state">
+        <span class="empty-icon">✅</span>
+        <p>No active alerts</p>
+    </div>
+    }
+    @for (alert of filtered; track alert.alert_id) {
+    <div class="alert-item" [class.resolved]="alert.resolved"
+        [style.border-left-color]="getSeverityColor(alert.severity)">
+        <div class="alert-icon">{{ typeIcons[alert.alert_type] }}</div>
+        <div class="alert-body">
+            <div class="alert-title">
+                <span class="alert-type">{{ typeLabels[alert.alert_type] }}</span>
+                <span class="alert-severity" [style.color]="getSeverityColor(alert.severity)">{{ alert.severity
+                    }}</span>
+                @if (alert.resolved) { <span class="resolved-badge">RESOLVED</span> }
+            </div>
+            <div class="alert-message">{{ alert.message }}</div>
+            <div class="alert-meta">
+                <span>📍 {{ alert.location }}</span>
+                <span>🗼 {{ alert.device_id }}</span>
+                <span>📊 Value: {{ alert.value | number:'1.1-1' }} / Threshold: {{ alert.threshold }}</span>
+                <span>🕐 {{ alert.timestamp | date:'HH:mm:ss' }}</span>
+            </div>
+        </div>
+        @if (!alert.resolved) {
+        <button class="resolve-btn" (click)="onResolve(alert.alert_id)">Resolve</button>
+        }
+    </div>
+    }
+</div>

@@ -1,0 +1,77 @@
+.alert-stats {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+
+    @media (max-width: 1200px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .stat-card {
+        background: #1e293b;
+        border-radius: 10px;
+        padding: 16px;
+        text-align: center;
+        border-top: 3px solid;
+
+        &.critical {
+            border-color: #ef4444;
+
+            .stat-value {
+                color: #ef4444;
+            }
+        }
+
+        &.warning {
+            border-color: #f59e0b;
+
+            .stat-value {
+                color: #f59e0b;
+            }
+        }
+
+        &.resolved {
+            border-color: #10b981;
+
+            .stat-value {
+                color: #10b981;
+            }
+        }
+
+        &.latency {
+            border-color: #3b82f6;
+
+            .stat-value {
+                color: #3b82f6;
+            }
+        }
+
+        &.packet {
+            border-color: #8b5cf6;
+
+            .stat-value {
+                color: #8b5cf6;
+            }
+        }
+
+        &.signal {
+            border-color: #06b6d4;
+
+            .stat-value {
+                color: #06b6d4;
+            }
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            color: #64748b;
+            font-size: 12px;
+        }
+    }
+}

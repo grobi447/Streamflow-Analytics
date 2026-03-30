@@ -27,4 +27,13 @@ class AnalyticsService:
     def get_trends(self, hours: int = 24) -> List[TrendPoint]:
         return self._repository.get_trends(hours)
 
+    def get_all_devices(self) -> List[DeviceSummary]:
+        return self._repository.get_all_devices()
+
+    def get_trends_minutes(self, minutes: int) -> List[TrendPoint]:
+        return self._repository.get_trends_minutes(minutes)
+
+    def get_latest_device_values(self) -> List[DeviceSummary]:
+        return self._repository.get_latest_device_values()
+
 analytics_service = AnalyticsService(repository=AnalyticsRepository())

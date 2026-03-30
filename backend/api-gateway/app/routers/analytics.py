@@ -34,3 +34,23 @@ async def get_trends(hours: int = 24, user=Depends(verify_token)):
     async with httpx.AsyncClient() as client:
         response = await client.get(f"{settings.ANALYTICS_SERVICE_URL}/analytics/trends?hours={hours}")
         return response.json()
+
+@router.get("/analytics/devices")
+async def get_all_devices(user=Depends(verify_token)):
+    async with httpx.AsyncClient() as client:
+        response = await client.get(f"{settings.ANALYTICS_SERVICE_URL}/analytics/devices")
+        return response.json()
+    
+@router.get("/analytics/trends")
+async def get_trends(minutes: int = 60, user=Depends(verify_token)):
+    async with httpx.AsyncClient() as client:
+        response = await client.get(
+            f"{settings.ANALYTICS_SERVICE_URL}/analytics/trends?minutes={minutes}"
+        )
+        return response.json()
+    
+@router.get("/analytics/latest-devices")
+async def get_latest_devices(user=Depends(verify_token)):
+    async with httpx.AsyncClient() as client:
+        response = await client.get(f"{settings.ANALYTICS_SERVICE_URL}/analytics/latest-devices")
+        return response.json()

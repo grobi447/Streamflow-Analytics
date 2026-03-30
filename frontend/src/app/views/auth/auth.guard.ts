@@ -20,6 +20,5 @@ export const publicGuard: CanActivateFn = () => {
         router.navigate(['/app/dashboard']);
         return false;
     }
-
     return true;
 };

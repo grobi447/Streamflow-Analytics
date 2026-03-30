@@ -1,0 +1,105 @@
+.alert-list {
+    .empty-state {
+        text-align: center;
+        padding: 48px;
+        color: #64748b;
+
+        .empty-icon {
+            font-size: 48px;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        p {
+            font-size: 14px;
+        }
+    }
+
+    .alert-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 16px;
+        border-left: 4px solid;
+        border-radius: 8px;
+        background: #0f172a;
+        margin-bottom: 8px;
+        transition: background 0.2s;
+
+        &:hover {
+            background: #1e293b;
+        }
+
+        &.resolved {
+            opacity: 0.5;
+        }
+
+        .alert-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .alert-body {
+            flex: 1;
+
+            .alert-title {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                margin-bottom: 4px;
+
+                .alert-type {
+                    color: #f1f5f9;
+                    font-weight: 600;
+                    font-size: 14px;
+                }
+
+                .alert-severity {
+                    font-size: 11px;
+                    font-weight: 700;
+                    letter-spacing: 0.05em;
+                }
+
+                .resolved-badge {
+                    background: #10b981;
+                    color: #0f172a;
+                    padding: 1px 6px;
+                    border-radius: 4px;
+                    font-size: 10px;
+                    font-weight: 700;
+                }
+            }
+
+            .alert-message {
+                color: #94a3b8;
+                font-size: 13px;
+                margin-bottom: 6px;
+            }
+
+            .alert-meta {
+                display: flex;
+                gap: 12px;
+                flex-wrap: wrap;
+                font-size: 11px;
+                color: #64748b;
+            }
+        }
+
+        .resolve-btn {
+            flex-shrink: 0;
+            padding: 6px 14px;
+            background: transparent;
+            border: 1px solid #10b981;
+            color: #10b981;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+
+            &:hover {
+                background: #10b981;
+                color: #0f172a;
+            }
+        }
+    }
+}

@@ -1,0 +1,128 @@
+.dashboard {
+    padding: 24px;
+    background: #0f172a;
+    min-height: 100%;
+    color: #f1f5f9;
+    overflow-y: auto;
+
+    .dashboard-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-bottom: 4px;
+        }
+
+        .last-updated {
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .time-range-buttons {
+            display: flex;
+            gap: 8px;
+
+            .time-btn {
+                padding: 6px 14px;
+                border-radius: 6px;
+                border: 1px solid #334155;
+                background: transparent;
+                color: #94a3b8;
+                font-size: 12px;
+                cursor: pointer;
+                transition: all 0.2s;
+
+                &:hover {
+                    border-color: #3b82f6;
+                    color: #3b82f6;
+                }
+
+                &.active {
+                    background: #3b82f6;
+                    border-color: #3b82f6;
+                    color: white;
+                }
+            }
+        }
+
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #10b981;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+
+            .pulse {
+                width: 8px;
+                height: 8px;
+                background: #10b981;
+                border-radius: 50%;
+                animation: pulse 1.5s infinite;
+            }
+        }
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 16px;
+        margin-bottom: 24px;
+
+        @media (max-width: 1400px) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @media (max-width: 900px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    .charts-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+
+    .chart-card {
+        background: #1e293b;
+        border-radius: 12px;
+        padding: 16px;
+        border: 1px solid #334155;
+    }
+
+    .map-card {
+        background: #1e293b;
+        border-radius: 12px;
+        padding: 16px;
+        margin-bottom: 24px;
+        border: 1px solid #334155;
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: scale(1.3);
+    }
+}

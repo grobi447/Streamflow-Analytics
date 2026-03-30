@@ -115,3 +115,93 @@ class AnalyticsRepository:
                 )
                 for row in rows
             ]
+        
+    def get_all_devices(self) -> List[DeviceSummary]:
+        with vertica_connection.get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                SELECT
+                    device_id,
+                    location,
+                    AVG(latency_ms) as avg_latency_ms,
+                    AVG(packet_loss) as avg_packet_loss,
+                    AVG(bandwidth_mbps) as avg_bandwidth_mbps,
+                    AVG(signal_strength_dbm) as avg_signal_strength_dbm,
+                    COUNT(*) as total_events
+                FROM network_events
+                GROUP BY device_id, location
+                ORDER BY avg_latency_ms DESC
+            """)
+            rows = cursor.fetchall()
+            return [
+                DeviceSummary(
+                    device_id=row[0],
+                    location=row[1],
+                    avg_latency_ms=round(row[2], 2),
+                    avg_packet_loss=round(row[3], 2),
+                    avg_bandwidth_mbps=round(row[4], 2),
+                    avg_signal_strength_dbm=round(row[5], 2),
+                    total_events=row[6]
+                )
+                for row in rows
+            ]
+        
+    def get_trends_minutes(self, minutes: int = 60) -> List[TrendPoint]:
+        with vertica_connection.get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                SELECT
+                    DATE_TRUNC('minute', timestamp) as minute,
+                    AVG(latency_ms) as avg_latency_ms,
+                    AVG(packet_loss) as avg_packet_loss,
+                    AVG(bandwidth_mbps) as avg_bandwidth_mbps,
+                    COUNT(*) as total_events
+                FROM network_events
+                WHERE timestamp >= NOW() - INTERVAL '%s minutes'
+                GROUP BY DATE_TRUNC('minute', timestamp)
+                ORDER BY minute ASC
+            """, (minutes,))
+            rows = cursor.fetchall()
+            return [
+                TrendPoint(
+                    timestamp=row[0],
+                    avg_latency_ms=round(row[1], 2),
+                    avg_packet_loss=round(row[2], 2),
+                    avg_bandwidth_mbps=round(row[3], 2),
+                    total_events=row[4]
+                )
+                for row in rows
+            ]
+        
+    def get_latest_device_values(self) -> List[DeviceSummary]:
+        with vertica_connection.get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                SELECT
+                    e.device_id,
+                    e.location,
+                    e.latency_ms as avg_latency_ms,
+                    e.packet_loss as avg_packet_loss,
+                    e.bandwidth_mbps as avg_bandwidth_mbps,
+                    e.signal_strength_dbm as avg_signal_strength_dbm,
+                    1 as total_events
+                FROM network_events e
+                INNER JOIN (
+                    SELECT device_id, MAX(timestamp) as max_ts
+                    FROM network_events
+                    GROUP BY device_id
+                ) latest ON e.device_id = latest.device_id AND e.timestamp = latest.max_ts
+            """)
+            rows = cursor.fetchall()
+            return [
+                DeviceSummary(
+                    device_id=row[0],
+                    location=row[1],
+                    avg_latency_ms=round(row[2], 2),
+                    avg_packet_loss=round(row[3], 2),
+                    avg_bandwidth_mbps=round(row[4], 2),
+                    avg_signal_strength_dbm=round(row[5], 2),
+                    total_events=row[6]
+                )
+                for row in rows
+            ]

@@ -1,0 +1,26 @@
+<div class="alert-stats">
+    <div class="stat-card critical">
+        <div class="stat-value">{{ critical }}</div>
+        <div class="stat-label">🔴 Critical</div>
+    </div>
+    <div class="stat-card warning">
+        <div class="stat-value">{{ warning }}</div>
+        <div class="stat-label">🟡 Warning</div>
+    </div>
+    <div class="stat-card resolved">
+        <div class="stat-value">{{ resolved }}</div>
+        <div class="stat-label">✅ Resolved</div>
+    </div>
+    <div class="stat-card latency">
+        <div class="stat-value">{{ highLatency }}</div>
+        <div class="stat-label">⚡ High Latency</div>
+    </div>
+    <div class="stat-card packet">
+        <div class="stat-value">{{ highPacketLoss }}</div>
+        <div class="stat-label">📉 Packet Loss</div>
+    </div>
+    <div class="stat-card signal">
+        <div class="stat-value">{{ lowSignal }}</div>
+        <div class="stat-label">📡 Low Signal</div>
+    </div>
+</div>
